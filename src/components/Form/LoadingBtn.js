@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 
 function LoadingBtn() {
   return (
     <button className="btn loading-btn">
-      <div className="spinner"></div>
+      <div className="spinner" />
     </button>
-  )
+  );
 }
 
-export default LoadingBtn
+export default LoadingBtn;

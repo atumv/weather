@@ -1,18 +1,17 @@
-import React from 'react'
+import React from "react";
 
-function getCity(e) {
-  e.preventDefault()
-  document.querySelector('.city-input').value = e.target.textContent
-  document.querySelector('.get-btn').click()
-}
-
-function CityExamples() {
-  
-  const attr = {
-    className: 'city-example-link',
-    href: '#',
-    onClick: getCity
+function CityExamples({ inputRef, getBtnRef }) {
+  function getExampleWeather(e) {
+    e.preventDefault();
+    inputRef.current.value = e.target.textContent;
+    getBtnRef.current.click();
   }
+
+  const attr = {
+    className: "city-example-link",
+    href: "#",
+    onClick: getExampleWeather
+  };
 
   return (
     <div className="city-examples">
@@ -24,7 +23,7 @@ function CityExamples() {
       <a {...attr}>Стамбул</a>
       <a {...attr}>Новосибирск</a>
     </div>
-  )
+  );
 }
 
-export default CityExamples
+export default CityExamples;
