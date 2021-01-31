@@ -1,81 +1,76 @@
 import React, { useState } from "react";
-import Header from "./components/Header";
-import Form from "./components/Form/Form";
-import Weather from "./components/Weather";
+import ImageSearch from "./components/ImageSearch";
+import ImageList from "./components/ImageList";
+import Pagination from "./components/Pagination";
 import "./styles/style.css";
-import "./styles/media.css";
 
-const api_key = "4c3dab4e5b6cd35fa657b1440eb74bfb";
+const api_key = "16587840-38253a67588d5082167fb10f6";
 
 function App() {
-  const [temperature, setTemperature] = useState(undefined);
-  const [city, setCity] = useState(undefined);
-  const [country, setCountry] = useState(undefined);
-  const [windDirection, setWindDirection] = useState(undefined);
-  const [windSpeed, setWindSpeed] = useState(undefined);
-  const [icon, setIcon] = useState(undefined);
-  const [description, setDescription] = useState(undefined);
+  const [images, setImages] = useState([]);
   const [loading, setLoading] = useState(undefined);
+  const [totalPages, setTotalPages] = useState(undefined);
+  const [currentPage, setCurrentPage] = useState(undefined);
+  const [prevQuery, setPrevQuery] = useState(undefined);
+  const [searchBtnRef, setSearchBtnRef] = useState(undefined);
   const [error, setError] = useState(undefined);
 
-  const getWeather = async e => {
+  const getImages = async e => {
     e.preventDefault();
-    const city = e.target.elements.city.value;
-    if (city) setLoading(true);
-    const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${api_key}&units=metric&lang=ru`;
+    const query = e.target.elements.query.value;
+    if (query) setLoading(true);
+    const url = `https://pixabay.com/api/?key=${api_key}&q=${query}&page=${
+      query !== prevQuery ? setCurrentPage(1) : currentPage
+    }&per_page=30&image_type=photo&pretty=true&orientation=horizontal`;
     const request = await fetch(url);
     const response = await request.json();
-    const status = response.cod;
 
-    const clearState = () => {
-      setTemperature(undefined);
-      setCity(undefined);
-      setCountry(undefined);
-      setWindDirection(undefined);
-      setWindSpeed(undefined);
-      setIcon(undefined);
-      setDescription(undefined);
-    };
+    function pageCounter() {
+      const pages = parseInt(response.totalHits / 30);
+      if (pages > 10) return 10;
+      return pages;
+    }
 
-    if (status == 200) {
-      setTemperature(response.main.temp);
-      setCity(response.name);
-      setCountry(response.sys.country);
-      setWindDirection(response.wind.deg);
-      setWindSpeed(response.wind.speed);
-      setIcon(
-        `https://openweathermap.org/img/wn/${response.weather[0].icon}.png`
-      );
-      setDescription(response.weather[0].description);
+    if (!query) {
+      setImages([]);
+      setTotalPages(undefined);
       setError(undefined);
       setLoading(false);
-    } else if (status == 400) {
-      clearState();
-      setError("Введите название города");
+    } else if (!response.total) {
+      setImages([]);
+      setTotalPages(undefined);
+      setError("Изображения не найдены.");
       setLoading(false);
-    } else if (status == 404) {
-      clearState();
-      setError("Город не найден");
+    } else if (response.total) {
+      setImages(response.hits);
+      setTotalPages(pageCounter());
+      setPrevQuery(query);
+      setError(undefined);
       setLoading(false);
     }
   };
 
+  function changePage(e, pageNum) {
+    e.preventDefault();
+    setCurrentPage(pageNum);
+    setImages([]);
+    window.scrollTo({ top: 0 });
+    setTimeout(() => searchBtnRef.current.click());
+  }
+
   return (
     <div className="app">
-      <Header />
+      <ImageSearch getImages={getImages} setSearchBtnRef={setSearchBtnRef} />
 
-      <Form loading={loading} getWeather={getWeather} />
+      {error && <p className="error">{error}</p>}
 
-      {loading === false && (
-        <Weather
-          temperature={temperature}
-          city={city}
-          country={country}
-          icon={icon}
-          description={description}
-          windSpeed={windSpeed}
-          windDirection={windDirection}
-          error={error}
+      <ImageList images={images} totalPages={totalPages} />
+
+      {loading === false && totalPages > 1 && (
+        <Pagination
+          totalPages={totalPages}
+          currentPage={currentPage}
+          changePage={changePage}
         />
       )}
     </div>

@@ -1,5 +1,5 @@
 {
-  "homepage": "http://atumv.github.io/weather",
+  "homepage": "http://atumv.github.io/image-search",
   "name": "react",
   "version": "0.0.0",
   "private": true,
@@ -14,7 +14,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --remote weather"
+    "deploy": "gh-pages -d build --remote image-search"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
