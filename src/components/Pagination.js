@@ -8,13 +8,13 @@ function Pagination(props) {
       <li className="pagination-item" key={i}>
         <a
           className={
-            props.currentPage === i
+            props.currentPage == i
               ? "pagination-link pagination-link-active"
               : "pagination-link pagination-link-passive"
           }
           href="#"
           onClick={
-            props.currentPage === i
+            props.currentPage == i
               ? e => e.preventDefault()
               : e => props.changePage(e, i)
           }

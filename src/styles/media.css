@@ -1,0 +1,33 @@
+@media (max-width: 576px) {
+  .search-form {
+    grid-template-columns: 100%;
+    grid-template-rows: 4rem 4rem;
+  }
+
+  .search-input {
+    text-align: center;
+    border-radius: 20px 20px 0 0;
+  }
+
+  .search-btn {
+    border-radius: 0 0 20px 20px;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .card {
+    padding: 1.5rem;
+  }
+
+  .card-description {
+    padding: 0 0.4rem;
+  }
+}
+
+@media (max-width: 380px) {
+  .app {
+    padding: 1.5rem;
+  }
+}
