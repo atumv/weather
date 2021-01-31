@@ -1,5 +1,5 @@
 {
-  "homepage": "http://atumv.github.io/movie-db",
+  "homepage": "http://atumv.github.io/todo",
   "name": "react",
   "version": "0.0.0",
   "private": true,
@@ -14,7 +14,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --remote movie-db"
+    "deploy": "gh-pages -d build --remote todo"
   },
   "devDependencies": {
     "@material-ui/core": "^4.11.3",
