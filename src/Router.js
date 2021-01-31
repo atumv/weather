@@ -7,7 +7,7 @@ function Router() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/" component={App} exact />
+        <Route path="/image-search" component={App} exact />
         <Route path="/image/:id" component={ImageView} />
       </Switch>
     </BrowserRouter>
