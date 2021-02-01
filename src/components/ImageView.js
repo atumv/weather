@@ -38,7 +38,7 @@ function ImageView(props) {
             Скачать
           </Button>
         </a>
-        <Link to="/">
+        <Link to="/image-search">
           <button className="back-btn">
             <svg
               className="back-icon"
