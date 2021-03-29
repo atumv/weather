@@ -1,0 +1,30 @@
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 3rem 1rem;
+  }
+
+  .header {
+    text-align: center;
+  }
+
+  .add-input {
+    width: 100%;
+    padding: 0.9rem 0.8rem 0.8rem 0.8rem;
+    text-align: center;
+    border: 1px solid #7478ea;
+    border-bottom: 0;
+    border-radius: 5px 5px 0px 0px;
+  }
+
+  .add-btn {
+    width: 100%;
+    padding: 0.9rem 0.8rem 0.8rem 0.8rem;
+    border-radius: 0px 0px 5px 5px;
+    box-shadow: 0 0px 0px rgba(0, 0, 0, 0.24);
+    border-top: 0;
+  }
+
+  .no-tasks-msg {
+    text-align: center;
+  }
+}

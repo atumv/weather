@@ -1,77 +1,26 @@
-import React, { useState } from "react";
-import ImageSearch from "./components/ImageSearch";
-import ImageList from "./components/ImageList";
-import Pagination from "./components/Pagination";
+import React from "react";
+import AddTodo from "./components/AddTodo";
+import TodoList from "./components/TodoList";
+import { useSelector } from "react-redux";
 import "./styles/style.css";
-
-const api_key = "16587840-38253a67588d5082167fb10f6";
+import "./styles/media.css";
 
 function App() {
-  const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(undefined);
-  const [totalPages, setTotalPages] = useState(undefined);
-  const [currentPage, setCurrentPage] = useState(undefined);
-  const [prevQuery, setPrevQuery] = useState(undefined);
-  const [searchBtnRef, setSearchBtnRef] = useState(undefined);
-  const [error, setError] = useState(undefined);
-
-  const getImages = async e => {
-    e.preventDefault();
-    const query = e.target.elements.query.value;
-    if (query) setLoading(true);
-    const url = `https://pixabay.com/api/?key=${api_key}&q=${query}&page=${
-      query !== prevQuery ? setCurrentPage(1) : currentPage
-    }&per_page=30&image_type=photo&pretty=true&orientation=horizontal`;
-    const request = await fetch(url);
-    const response = await request.json();
-
-    function pageCounter() {
-      const pages = parseInt(response.totalHits / 30);
-      if (pages > 10) return 10;
-      return pages;
-    }
-
-    if (!query) {
-      setImages([]);
-      setTotalPages(undefined);
-      setError(undefined);
-      setLoading(false);
-    } else if (!response.total) {
-      setImages([]);
-      setTotalPages(undefined);
-      setError("Изображения не найдены.");
-      setLoading(false);
-    } else if (response.total) {
-      setImages(response.hits);
-      setTotalPages(pageCounter());
-      setPrevQuery(query);
-      setError(undefined);
-      setLoading(false);
-    }
-  };
-
-  function changePage(e, pageNum) {
-    e.preventDefault();
-    setCurrentPage(pageNum);
-    setImages([]);
-    window.scrollTo({ top: 0 });
-    setTimeout(() => searchBtnRef.current.click());
-  }
+  const todos = useSelector(state => state);
 
   return (
-    <div className="app">
-      <ImageSearch getImages={getImages} setSearchBtnRef={setSearchBtnRef} />
+    <div className="wrapper">
+      <h1 className="header">Список задач</h1>
 
-      {error && <p className="error">{error}</p>}
+      <AddTodo />
 
-      <ImageList images={images} totalPages={totalPages} />
-
-      {loading === false && totalPages > 1 && (
-        <Pagination
-          totalPages={totalPages}
-          currentPage={currentPage}
-          changePage={changePage}
-        />
+      {todos.length ? (
+        <TodoList todos={todos} />
+      ) : (
+        <div className="no-tasks">
+          <p className="no-tasks-msg">Список задач пуст.</p>
+          <p className="no-tasks-msg">Добавьте задачу чтобы начать работу.</p>
+        </div>
       )}
     </div>
   );
