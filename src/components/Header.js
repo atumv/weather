@@ -1,5 +1,9 @@
 import React from "react";
 
-const Header = () => <h1 className="header">Список задач</h1>;
+const Header = () => (
+  <a className="header-link" href="index.html">
+    <h1 className="header">Погода</h1>
+  </a>
+);
 
 export default Header;
