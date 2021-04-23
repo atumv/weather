@@ -1,12 +1,15 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { Provider } from "react-redux";
-import { store } from "./redux/store";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import App from "./App";
+import ImageView from "./components/ImageView";
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Router>
+    <Switch>
+      <Route path="/" exact component={App} />
+      <Route path="/image/:id" component={ImageView} />
+    </Switch>
+  </Router>,
   document.getElementById("root")
 );

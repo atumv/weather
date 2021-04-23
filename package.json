@@ -1,14 +1,13 @@
 {
-  "homepage": "http://atumv.github.io/todo-redux",
-  "name": "react",
-  "version": "0.0.0",
+  "homepage": "http://atumv.github.io/portfolio",
+  "name": "portfolio",
+  "version": "0.0.1",
   "private": true,
   "dependencies": {
     "gh-pages": "^3.1.0",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-redux": "^7.2.3",
-    "redux": "^2.0.0 || ^3.0.0 || ^4.0.0-0"
+    "node-sass": "^4.0.0",
+    "react": "^16.8.0 || ^17.0.0 >=16.0.0 >=15 17.0.2",
+    "react-dom": "^16.8.0 || ^17.0.0"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -16,7 +15,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --remote todo-redux"
+    "deploy": "gh-pages -d build --remote portfolio"
   },
   "devDependencies": {
     "react-scripts": "latest"
