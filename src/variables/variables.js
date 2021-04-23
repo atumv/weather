@@ -1,3 +1,3 @@
-export const api_key = "16587840-38253a67588d5082167fb10f6";
+export const api_key = "3b33b8c8d2c93ecef17e3034abad89bd";
 export const base_url =
-  "https://pixabay.com/api/?orientation=horizontal&per_page=120";
+  "https://api.themoviedb.org/3/search/movie?include_adult=false&language=ru-RU";

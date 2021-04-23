@@ -1,19 +1,28 @@
 import React, { useRef, useEffect } from "react";
+import randomMovie from "../utils/randomMovie";
 
-const SearchForm = ({ getImages }) => {
-  const searchInput = useRef();
+const SearchForm = ({ getMovies, setSearchBtnRef }) => {
+  const searchInputRef = useRef();
+  const searchBtnRef = useRef();
 
-  useEffect(() => searchInput.current.focus());
+  useEffect(() => {
+    setSearchBtnRef(searchBtnRef);
+  }, []);
+
+  useEffect(() => searchInputRef.current.focus());
 
   return (
-    <form className="form" onSubmit={getImages}>
+    <form className="search-form" onSubmit={getMovies}>
       <input
-        className="form-input"
+        className="search-input"
         type="text"
         name="query"
-        placeholder="type here"
-        ref={searchInput}
+        placeholder={`Например, «${randomMovie()}»`}
+        ref={searchInputRef}
       />
+      <button className="search-btn" type="submit" ref={searchBtnRef}>
+        Найти
+      </button>
     </form>
   );
 };

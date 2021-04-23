@@ -1,55 +1,80 @@
 import React, { useState } from "react";
+import Header from "./components/Header";
 import SearchForm from "./components/SearchForm";
-import ImageList from "./components/ImageList";
 import Error from "./components/Error";
+import Loader from "./components/Loader";
+import MovieList from "./components/MovieList";
+import Pagination from "./components/Pagination";
 import { api_key, base_url } from "./variables/variables";
 import getData from "./utils/getData";
 import "./styles/style.css";
+import "./styles/media.css";
 
 const App = () => {
   const [apiKey] = useState(api_key);
   const [baseUrl] = useState(base_url);
-  const [images, setImages] = useState([]);
-  const [page, setPage] = useState(1);
-  const [query, setQuery] = useState(undefined);
+  const [movies, setMovies] = useState([]);
+  const [loading, setLoading] = useState(undefined);
+  const [totalPages, setTotalPages] = useState(undefined);
+  const [page, setPage] = useState(undefined);
+  const [prevQuery, setPrevQuery] = useState(undefined);
   const [error, setError] = useState(undefined);
+  const [searchBtnRef, setSearchBtnRef] = useState(undefined);
 
-  const getImages = async e => {
+  const getMovies = async e => {
     e.preventDefault();
 
     const inputValue = e.target.elements.query.value;
     const query = inputValue.trim();
 
-    const url = `${baseUrl}&key=${apiKey}&q=${query}&page=1`;
+    if (query) setLoading(true);
+    if (error) setLoading(false);
+
+    const pageChoice = query !== prevQuery ? setPage(1) : page;
+    const url = `${baseUrl}&api_key=${apiKey}&query=${query}&page=${pageChoice}`;
     const data = await getData(url);
-    const { total: results, hits: images } = data;
+
+    const results = data.total_results;
+    const movies = data.results;
+    const countOfPages = data.total_pages;
+    const pageLimit = countOfPages > 10 ? 10 : countOfPages;
+    
+    const clearState = () => {
+      setMovies([]);
+      setTotalPages(0);
+      setLoading(false);
+    };
 
     if (!query) {
-      setImages([]);
+      clearState();
       setError(undefined);
     } else if (!results) {
-      setImages([]);
-      setError("No images were found.");
+      clearState();
+      setError("Фильм не найден.");
     } else if (results) {
-      setQuery(query);
-      setImages(images);
+      setMovies(movies);
+      setPrevQuery(query);
+      setTotalPages(pageLimit);
       setError(undefined);
+      setLoading(false);
     }
   };
 
-  const loadMore = async () => {
-    const url = `${baseUrl}&key=${apiKey}&q=${query}&page=${page + 1}`;
-    const data = await getData(url);
-    const newImages = data.hits;
-    setImages([...images, ...newImages]);
-    setPage(page === 1 ? 3 : page + 1);
-  };
-
   return (
-    <div>
-      <SearchForm getImages={getImages} />
-      <ImageList images={images} loadMore={loadMore} />
-      <Error error={error} />
+    <div className="app">
+      <Header />
+      <SearchForm getMovies={getMovies} setSearchBtnRef={setSearchBtnRef} />
+      {error ? <Error error={error} /> : <MovieList movies={movies} />}
+      {loading && <Loader />}
+      {!loading && totalPages > 1 && (
+        <Pagination
+          page={page}
+          totalPages={totalPages}
+          setPage={setPage}
+          setMovies={setMovies}
+          searchBtnRef={searchBtnRef}
+        />
+      )}
     </div>
   );
 };
