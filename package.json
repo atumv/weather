@@ -1,6 +1,6 @@
 {
-  "homepage": "http://atumv.github.io/movie-db",
-  "name": "movie-db",
+  "homepage": "http://atumv.github.io/todo",
+  "name": "todo",
   "version": "0.0.1",
   "private": true,
   "dependencies": {
@@ -14,7 +14,7 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build --remote movie-db"
+    "deploy": "gh-pages -d build --remote todo"
   },
   "devDependencies": {
     "react-scripts": "latest"
