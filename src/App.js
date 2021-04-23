@@ -10,13 +10,15 @@ const App = () => {
   const [apiKey] = useState(api_key);
   const [baseUrl] = useState(base_url);
   const [images, setImages] = useState([]);
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(undefined);
   const [query, setQuery] = useState(undefined);
   const [error, setError] = useState(undefined);
 
   const getImages = async e => {
     e.preventDefault();
 
+    setPage(1);
+    
     const inputValue = e.target.elements.query.value;
     const query = inputValue.trim();
 
@@ -42,7 +44,7 @@ const App = () => {
     const data = await getData(url);
     const newImages = data.hits;
     setImages([...images, ...newImages]);
-    setPage(page === 1 ? 3 : page + 1);
+    setPage(page + 1);
   };
 
   return (
