@@ -34,7 +34,7 @@ body {
   font-weight: 600;
   margin-bottom: 1rem;
   line-height: 1;
-  text-shadow: 0px 0px 2px #444444;
+  text-shadow: 0px -1px #3b3ca1, 0px -2px #3b3ca1, 0px -3px #3b3ca1;
 }
 
 .input-wrap {
