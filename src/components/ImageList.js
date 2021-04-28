@@ -6,7 +6,7 @@ const ImageList = ({ images, loadMore }) => (
   <InfiniteScrolling loadMore={loadMore}>
     <div className="image-list">
       {images.map(image => (
-        <div key={image.id}>
+        <div className="image-container" key={image.id}>
           <Link
             to={{
               pathname: `/image/${image.id}`,

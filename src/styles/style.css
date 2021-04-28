@@ -60,13 +60,16 @@ body {
   }
 }
 
+.image-container {
+  margin: 9.5px;
+  max-width: 218px;
+  border-radius: 12px;
+  cursor: pointer;
+}
+
 .img-thumb {
   width: 100%;
   height: auto;
-  max-width: 218px;
-  padding: 9.5px;
-  border-radius: 12px;
-  cursor: pointer;
   animation: fadeIn 0.5s ease-in;
 }
 

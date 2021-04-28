@@ -14,7 +14,7 @@ const ImageView = props => {
         <ImagePreview image={image} />
         <UserInfo image={image} />
         <DownloadButton image={image} />
-        <Link to="/">
+        <Link to="/image-search/">
           <BackButton />
         </Link>
       </div>
