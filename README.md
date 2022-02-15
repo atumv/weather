@@ -1,3 +1,3 @@
 # Weather App
 
-![example](/public/example.png)
+![example](/assets/preview.png)
