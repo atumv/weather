@@ -1,7 +1,5 @@
-const getData = async url => {
+export const getData = async (url) => {
   const response = await fetch(url);
   const data = response.json();
   return data;
 };
-
-export default getData;

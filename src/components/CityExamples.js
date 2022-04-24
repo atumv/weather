@@ -1,7 +1,7 @@
-import React from "react";
+import React from 'react';
 
-const CityExamples = ({ inputRef, getBtnRef }) => {
-  const getWeatherExample = e => {
+export const CityExamples = ({ inputRef, getBtnRef }) => {
+  const getWeatherExample = (e) => {
     e.preventDefault();
     inputRef.current.value = e.target.textContent;
     getBtnRef.current.click();
@@ -9,9 +9,9 @@ const CityExamples = ({ inputRef, getBtnRef }) => {
   };
 
   const attributes = {
-    className: "city-example-link",
-    href: "#",
-    onClick: getWeatherExample
+    className: 'city-example-link',
+    href: '#',
+    onClick: getWeatherExample,
   };
 
   return (
@@ -26,5 +26,3 @@ const CityExamples = ({ inputRef, getBtnRef }) => {
     </div>
   );
 };
-
-export default CityExamples;

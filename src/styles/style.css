@@ -5,18 +5,17 @@
   padding: 0;
   border: 0;
   box-sizing: border-box;
-
-  font-family: "Roboto", "Open Sans", "Poppins", "Noto Sans", "Helvetica",
-    "Arial", sans-serif;
+  font-family: 'Roboto', 'Open Sans', 'Helvetica', 'Arial', sans-serif;
 }
 
 html {
   font-size: 17px;
+  overflow-y: scroll;
 }
 
 body {
   min-height: 100vh;
-  background: url("https://i.imgur.com/lcQbS1C.jpg");
+  background: url('../assets/images/bg.jpg');
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -96,6 +95,15 @@ body {
   padding: 0.4rem 2.65rem;
 }
 
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 .spinner {
   margin: 0 auto;
   border: 2px solid transparent;
@@ -105,15 +113,6 @@ body {
   width: 1.176rem;
   height: 1.176rem;
   animation: spin 0.5s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .city-examples {
@@ -139,6 +138,16 @@ body {
   color: #f8faff;
 }
 
+@keyframes fadeOut {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
 .weather {
   padding: 1rem;
   text-align: center;
@@ -149,17 +158,7 @@ body {
   margin: 0 auto;
   margin-top: 1rem;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  animation: fade-out 350ms ease-in;
-}
-
-@keyframes fade-out {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  animation: fadeOut 350ms ease-in;
 }
 
 .weather-city {

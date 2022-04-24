@@ -1,15 +1,8 @@
-import React from "react";
+import React from 'react';
 
-const Weather = props => {
-  const {
-    temp,
-    city,
-    country,
-    icon,
-    description,
-    windSpeed,
-    windDirection
-  } = props;
+export const Weather = (props) => {
+  const { temp, city, country, icon, description, windSpeed, windDirection } =
+    props;
 
   const plusSign = temp > 0 ? <span>+</span> : null;
 
@@ -52,5 +45,3 @@ const Weather = props => {
     </div>
   );
 };
-
-export default Weather;

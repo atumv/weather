@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import Header from "./components/Header";
-import Form from "./components/Form";
-import Weather from "./components/Weather";
-import Error from "./components/Error";
-import { api_key, base_url, icon_base_url } from "./variables/variables";
-import getData from "./utils/getData";
-import "./styles/style.css";
-import "./styles/media.css";
+import React, { useState } from 'react';
+import { Header } from './components/Header';
+import { Form } from './components/Form';
+import { Weather } from './components/Weather';
+import { Error } from './components/Error';
+import { api_key, base_url, icon_base_url } from './shared/variables/variables';
+import { getData } from './shared/utils/getData';
+import './styles/style.css';
+import './styles/media.css';
 
 const App = () => {
   const [apiKey] = useState(api_key);
@@ -22,7 +22,7 @@ const App = () => {
   const [loading, setLoading] = useState(undefined);
   const [error, setError] = useState(undefined);
 
-  const getWeather = async e => {
+  const getWeather = async (e) => {
     e.preventDefault();
 
     const inputValue = e.target.elements.query.value;
@@ -60,7 +60,7 @@ const App = () => {
       setLoading(false);
     } else if (code == 404) {
       clearState();
-      setError("Город не найден.");
+      setError('Город не найден.');
       setLoading(false);
     } else if (code == 200) {
       setState();

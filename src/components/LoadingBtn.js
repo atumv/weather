@@ -1,9 +1,7 @@
-import React from "react";
+import React from 'react';
 
-const LoadingBtn = () => (
+export const LoadingBtn = () => (
   <button className="btn loading-btn" disabled>
     <div className="spinner" />
   </button>
 );
-
-export default LoadingBtn;

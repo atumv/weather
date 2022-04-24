@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import Input from "./Input";
-import GetBtn from "./GetBtn";
-import LoadingBtn from "./LoadingBtn";
-import CityExamples from "./CityExamples";
+import React, { useState } from 'react';
+import { Input } from './Input';
+import { GetBtn } from './GetBtn';
+import { LoadingBtn } from './LoadingBtn';
+import { CityExamples } from './CityExamples';
 
-const Form = ({ loading, getWeather }) => {
+export const Form = ({ loading, getWeather }) => {
   const [inputRef, setInputRef] = useState(undefined);
   const [getBtnRef, setGetBtnRef] = useState(undefined);
 
@@ -16,5 +16,3 @@ const Form = ({ loading, getWeather }) => {
     </form>
   );
 };
-
-export default Form;

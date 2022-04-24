@@ -1,6 +1,6 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect } from 'react';
 
-const Input = ({ setInputRef }) => {
+export const Input = ({ setInputRef }) => {
   const input = useRef();
 
   useEffect(() => {
@@ -19,5 +19,3 @@ const Input = ({ setInputRef }) => {
     />
   );
 };
-
-export default Input;
